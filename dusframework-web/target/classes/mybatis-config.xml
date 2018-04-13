@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+    <settings>
+        <!-- 数据库字段与JavaBean属性采用驼峰命名映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+        <!-- Oracle库JDBC空类型兼容性处理 -->
+        <setting name="jdbcTypeForNull" value="NULL"></setting>
+        <!--返回对象是Map时，空值需要 put null  -->
+        <setting name="callSettersOnNulls" value="true"></setting>
+        <setting name="lazyLoadingEnabled" value="true"></setting>
+        <!--<setting name="errorTracingEnabled" value="true"></setting>
+         <setting name="useStatementNamespaces" value="true"></setting> -->
+    </settings>
+	<!--
+    <typeAliases>
+        <typeAlias type="com.dcits.galaxy.dal.mybatis.proactor.page.ParameterWrapper" alias="ParameterWrapper"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler javaType="String" handler="com.dcits.ensemble.plugins.handle.EnsDate2StringTypeHandle"></typeHandler>
+    </typeHandlers>
+
+    <plugins>
+        <plugin interceptor="com.dcits.galaxy.dal.mybatis.plugins.PagePlugin"/>
+    </plugins>
+      -->
+</configuration>

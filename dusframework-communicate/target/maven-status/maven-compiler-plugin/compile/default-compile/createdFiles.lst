@@ -1,0 +1,8 @@
+com\dus\dusframework\communicate\BaseCommunicateAdapter.class
+com\dus\dusframework\communicate\BaseCommunicateAdapterConfig.class
+com\dus\dusframework\communicate\mq\MQCommunicateAdapterConfig.class
+com\dus\dusframework\communicate\servlet\JettyCommunicateAdapter.class
+com\dus\dusframework\communicate\socket\SocketCommunicateAdapterConfig.class
+com\dus\dusframework\communicate\servlet\ServletCommunicateAdapter.class
+com\dus\dusframework\communicate\servlet\ServletCommunicateAdapterConfig.class
+com\dus\dusframework\communicate\ICommunicateAdapter.class

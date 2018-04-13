@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.dus.simulate.dao.AppLogFilterInfoDao">
+
+	<insert id="insert" parameterType="com.dus.simulate.domain.AppLogFilterInfoDo">
+		insert into app_log_filter_info (
+		BUSI_DATE, CHANNEL_CGY, CHANNEL_CODE,DAC_VERF, FILTER_CODE, FILTER_TYPE,
+		MULTI_ENTITY, PROJECT_ID, PROJECT_NAME,
+		REMARK_1, REMARK_2, SYSTEM_ID,SYSTEM_NAME, TMS, VNO)
+		values(
+		#{busiDate},
+		#{channelCgy},
+		#{channelCode},
+		#{dacVerf},
+		#{filterCode},
+		#{filterType},
+		#{multiEntity},
+		#{projectId},
+		#{projectName},
+		#{remark1},
+		#{remark2},
+		#{systemId},
+		#{systemName},
+		#{tms},
+		#{vno})
+		
+	</insert>
+    <!--根据id查询得到一个user对象-->
+    <select id="getbyId" parameterType="String" 
+        resultType="com.dus.simulate.domain.AppLogFilterInfoDo">
+        select * from t_user where id=#{id}
+    </select>
+    <select id="selectByPk" parameterType="map" resultType="com.dus.simulate.domain.AppLogFilterInfoDo">
+		select * from app_log_filter_info where project_id=#{projectId}
+    </select>
+    <select id="selectAll" parameterType="map" resultType="com.dus.simulate.domain.AppLogFilterInfoDo">
+		select * from app_log_filter_info where project_id=#{projectId}
+    </select>
+    <select id="selectByPage" parameterType="map" resultType="com.dus.simulate.domain.AppLogFilterInfoDo">
+		select * from app_log_filter_info where project_id=#{projectId}
+    </select>
+</mapper>

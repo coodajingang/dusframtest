@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="dusframework-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="dusframework-persist-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dusframework-persist/dusframework-persist">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dusframework-common-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dusframework-common/dusframework-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dusframework-context-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dusframework-context/dusframework-context">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="dusframework-web"/>
+        <property name="java-output-path" value="/dusframework-web/target/classes"/>
+    </wb-module>
+</project-modules>
