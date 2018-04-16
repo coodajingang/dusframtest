@@ -2,7 +2,9 @@ package com.dus.dusframework.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dus.dusframework.web.dao.DusDictBaseFieldDao;
 
@@ -16,13 +18,14 @@ public class Hello {
 	private DusDictBaseFieldDao dao;
 	
 	@GetMapping("/hello")
-	public String hello() {
+	public String hello(Model model) {
 		System.out.println("==================");  
 		
 		//Object obj = SpringAppContextUtil.getBean("person");
 		//System.out.println("==" + obj);
 		System.out.println("===" + this.dao);
 		
+		model.addAttribute("home", "adkkdkdkdkdkdkdkkddkk");
 		return "hello"; 
 	}
 	
@@ -36,7 +39,7 @@ public class Hello {
 		
 		return "world"; 
 	}
-	@GetMapping("/index")
+	@GetMapping("/index2")
 	public String getindex() {
 		System.out.println("==================");  
 		

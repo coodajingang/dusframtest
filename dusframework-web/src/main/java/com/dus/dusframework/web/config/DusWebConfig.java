@@ -41,9 +41,12 @@ public class DusWebConfig extends WebMvcConfigurerAdapter implements Application
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/static/dist/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/static/dist/js/");
         registry.addResourceHandler("/vendor/**")
-    	.addResourceLocations("/WEB-INF/static/vendor/");
-        registry.addResourceHandler("/testdata/**")
-    	.addResourceLocations("/WEB-INF/static/data/");
+    		.addResourceLocations("/WEB-INF/static/vendor/");
+        registry.addResourceHandler("/data/**")
+    		.addResourceLocations("/WEB-INF/static/data/");
+        registry.addResourceHandler("/pages/**")
+    		.addResourceLocations("/WEB-INF/static/pages/");
+
         /**
         registry.addResourceHandler("/vendor/bootstrap/css/**")
         	.addResourceLocations("/WEB-INF/static/vendor/bootstrap/css/");
