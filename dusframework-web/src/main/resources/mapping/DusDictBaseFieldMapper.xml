@@ -10,4 +10,51 @@
 		select * from dusdict_base_field 
 			where chn_name like #{str}
 	</select>
+	
+	<select id="searchLikeByPage" parameterType="Map"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseFieldDo">
+		select * from dusdict_base_field
+		<where>
+			<if test="str != null">
+				chn_name like CONCAT(CONCAT('%',#{str}),'%')
+				 or eng_name like CONCAT(CONCAT('%',#{str}),'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="checkRepeat" parameterType="com.dus.dusframework.web.domain.DusDictBaseFieldDo"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseFieldDo">
+		select * from dusdict_base_field
+		where
+			chn_name = #{chnName} 
+			and eng_name = #{engName}
+			and Abbreviate = #{abbreviate}
+	</select>
+	<insert id = "insert" parameterType="com.dus.dusframework.web.domain.DusDictBaseFieldDo">
+		insert into DUSDICT_BASE_FIELD (
+			SEQ_NO, 
+		    CHN_NAME, 
+		    ENG_NAME, 
+		    ABBREVIATE, 
+		    SOURCE, 
+		    FIELD_GROUP, 
+		    BEGINS, 
+		    REMARK, 
+		    BUSI_DATE, 
+		    TMS, 
+		    VNO
+		   )
+		 Values (
+		 	${'SEQ_DICT_BASE_FIELD.nextval'},
+		    #{chnName}, 
+		    #{engName}, 
+		    #{abbreviate}, 
+		    #{source}, 
+		    #{fieldGroup}, 
+		    #{begins}, 
+		    #{remark}, 
+		    #{busiDate}, 
+		    ${'sysdate'}, 
+		    #{vno})
+	</insert>
 </mapper>

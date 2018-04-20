@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html lang="cmn" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DictManager</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->  
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div id="wrapper">
+	<nav th:replace="navigate :: nav"></nav>
+
+	<div id="page-wrapper">
+            <div class="row">
+		<div id="flowTab_wrapper" class="dataTables_wrapper no-footer">
+			<div class="cl table-header" id="flowTab-header">
+				<div id="flowTab_filter" class="dataTables_filter">
+					<label><input type="search" class="input-text"
+						placeholder="检索内容..." aria-controls="flowTab"></label>
+				</div>
+				<a class="table-btn" id="add">添加流程</a><a class="table-btn" id="edit">修改流程</a>
+				<div class="dataTables_length" id="flowTab_length">
+					<label><select name="flowTab_length"
+						aria-controls="flowTab" class="select"><option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option></select></label>
+				</div>
+			</div>
+			<div id="flowTab_processing" class="dataTables_processing"
+				style="display: none;">Processing...</div>
+			<table id="flowTab"
+				class="table table-border table-bordered table-hover table-bg table-sort dataTable no-footer"
+				role="grid" aria-describedby="flowTab_info" style="width: 100%;">
+				<thead>
+					<tr class="text-c" role="row">
+						<th class="sorting_asc" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="流程ID: activate to sort column descending"
+							aria-sort="ascending">流程ID</th>
+						<th class="sorting" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="流程名称: activate to sort column ascending">流程名称</th>
+						<th class="sorting" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="状态: activate to sort column ascending">状态</th>
+						<th class="sorting" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="全局事务: activate to sort column ascending">全局事务</th>
+						<th class="sorting" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="超时时间(S): activate to sort column ascending">超时时间(S)</th>
+						<th class="sorting" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="创建时间: activate to sort column ascending">创建时间</th>
+						<th class="sorting" tabindex="0" aria-controls="flowTab"
+							rowspan="1" colspan="1"
+							aria-label="创建人: activate to sort column ascending">创建人</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" class="odd">
+						<td class="sorting_1">MbsdAccount-1000-9302-flow</td>
+						<td>总账记账</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20160310 13:27:08</td>
+						<td>admin</td>
+					</tr>
+					<tr role="row" class="even selected">
+						<td class="sorting_1">MbsdAccount-1000-9304-flow</td>
+						<td>准实时分录数据推送</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20161229 15:42:02</td>
+						<td>admin</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td class="sorting_1">MbsdAccount-1000-9307-flow</td>
+						<td>总行记账</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20160321 17:28:52</td>
+						<td>zhangyjw</td>
+					</tr>
+					<tr role="row" class="even">
+						<td class="sorting_1">MbsdAccount-1000-9316-flow</td>
+						<td>准备金缴存信息查询</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20170221 20:00:55</td>
+						<td>lippf</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td class="sorting_1">MbsdAccount-1200-9300-flow</td>
+						<td>总账开户及维护</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20160309 20:10:59</td>
+						<td>admin</td>
+					</tr>
+					<tr role="row" class="even">
+						<td class="sorting_1">MbsdAccount-1200-9301-flow</td>
+						<td>总账销户</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20160321 17:23:26</td>
+						<td>zhangyjw</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td class="sorting_1">MbsdAccount-1200-9401-flow</td>
+						<td>参数配置</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20160216 17:55:00</td>
+						<td>chenhr</td>
+					</tr>
+					<tr role="row" class="even">
+						<td class="sorting_1">MbsdAccount-1200-9405-flow</td>
+						<td>总账利率查询</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20170307 11:35:42</td>
+						<td>lippf</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td class="sorting_1">MbsdAccount-1400-9300-flow</td>
+						<td>往来账账号查询</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20170215 14:08:09</td>
+						<td>xuchaol</td>
+					</tr>
+					<tr role="row" class="even">
+						<td class="sorting_1">MbsdAccount-1400-9301-flow</td>
+						<td>往来账维护查询</td>
+						<td>开启</td>
+						<td>关闭</td>
+						<td>-1</td>
+						<td>20160317 11:21:28</td>
+						<td>admin</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="cl table-footer" id="flowTab-footer">
+				<div class="dataTables_info" id="flowTab_info" role="status"
+					aria-live="polite">
+					<span>1</span> 到 <span>10</span> 共 <span>672</span> 条
+				</div>
+				<div class="dataTables_paginate paging_full_numbers"
+					id="flowTab_paginate">
+					<a class="paginate_button first disabled" aria-controls="flowTab"
+						data-dt-idx="0" tabindex="0" id="flowTab_first">首页</a><a
+						class="paginate_button previous disabled" aria-controls="flowTab"
+						data-dt-idx="1" tabindex="0" id="flowTab_previous">上一页</a><span><a
+						class="paginate_button current" aria-controls="flowTab"
+						data-dt-idx="2" tabindex="0">1</a><a class="paginate_button "
+						aria-controls="flowTab" data-dt-idx="3" tabindex="0">2</a><a
+						class="paginate_button " aria-controls="flowTab" data-dt-idx="4"
+						tabindex="0">3</a><a class="paginate_button "
+						aria-controls="flowTab" data-dt-idx="5" tabindex="0">4</a><a
+						class="paginate_button " aria-controls="flowTab" data-dt-idx="6"
+						tabindex="0">5</a><span class="ellipsis">…</span><a
+						class="paginate_button " aria-controls="flowTab" data-dt-idx="7"
+						tabindex="0">68</a></span><a class="paginate_button next"
+						aria-controls="flowTab" data-dt-idx="8" tabindex="0"
+						id="flowTab_next">下一页</a><a class="paginate_button last"
+						aria-controls="flowTab" data-dt-idx="9" tabindex="0"
+						id="flowTab_last">尾页</a>
+				</div>
+			</div>
+		</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+$(document).ready(function() {
+	// 自定义table
+	var opt = getDataTableOpt($("#flowTab"));
+	opt.stateSave=true;
+	opt.processing=true;
+	opt.autoWidth=false;
+	opt.ajax= {
+			 "url": contextPath+"/flow/getFlow?envId=" + $("#envId").val(),
+			 "type": "POST"
+       	 };
+	opt.columns=[
+			{ "data": "flowid" },
+			{ "data": "title" },
+			{ "data": "state" },
+			{ "data": "dtpFlag" },
+			{ "data": "timeOut" },
+			{ "data": "createtime" },
+			{ "data": "creator" }
+		];
+	drawDataTable($("#flowTab"),opt);
+	$("#flowTab").beautyUi({
+                        tableId:"flowTab",
+                        buttonName:["添加流程","修改流程" ],
+                        buttonId:["add","edit" ],
+    });
+
+	  $("#add").on("click",function(){
+	       var envId = $("#envId").val();
+	       if(envId==""){
+	           showMsg("开发环境为空！","warning");
+           }else{
+               showFlowDefine("insert");
+           }
+          });
+      $("#edit").on("click",function(){
+             var envId = $("#envId").val();
+             if(envId==""){
+                 showMsg("开发环境为空！","warning");
+                    return;
+             }else{
+                 if ($("#flowTab").find(".selected").length!=1){
+									showMsg('请选择一行记录','warning');
+									return;
+				 }
+				 showFlowDefine("update");
+             }
+        });
+	selectFlow_callBack();
+	// 获取环境列表
+	getPkList({
+		url:contextPath+"/pklist/getEnvId",
+		id:"envId",
+		async:false
+	});
+
+	$("#envId").change(function(){
+		selectFlow();
+	});
+	       $(".select2").select2();
+   /*页面按钮根据权限实现隐藏*/
+           pagePerm();
+} );
+
+function selectFlow() {
+    var flowTab = $("#flowTab").dataTable();
+    if ("" == $("#envId").val()) {
+        return;
+    }
+    var api = flowTab.api();
+    api.ajax.url(contextPath+"/flow/getFlow?envId=" + $("#envId").val()).load();
+}
+
+function selectFlow_callBack(json){
+	var flowTab = $("#flowTab").dataTable();
+	var api = flowTab.api();
+ 	$('#flowTab tbody').on('click', 'tr', function (e) {
+        if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		} else {
+			$('#flowTab').find("tr").removeClass('selected');
+			$(this).addClass('selected');
+		}
+    } );
+}
+
+function getEnvId(){
+    return $("#envId").val();
+}
+
+var option;
+function showFlowDefine(opt){
+	option = opt;
+	var index = layer.open({
+		type: 2,
+		title: option=="insert"?"流程定义":"流程修改",
+		content: contextPath + "/app/tools/flowDefine.jsp",
+		end: selectFlow
+	});
+	layer.full(index);
+}
+</script>
+
+</div>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
+    
+    <!-- Morris Charts JavaScript 
+    <script src="vendor/raphael/raphael.min.js"></script>
+    <script src="vendor/morrisjs/morris.min.js"></script>
+    <script src="data/morris-data.js"></script>-->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+    
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+    </script>
+</body>
+</html>

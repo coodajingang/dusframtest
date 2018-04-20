@@ -1,5 +1,8 @@
 package com.dus.dusframework.web.config;
 
+import java.nio.charset.Charset;
+import java.util.List;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -7,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -46,7 +52,8 @@ public class DusWebConfig extends WebMvcConfigurerAdapter implements Application
     		.addResourceLocations("/WEB-INF/static/data/");
         registry.addResourceHandler("/pages/**")
     		.addResourceLocations("/WEB-INF/static/pages/");
-
+        registry.addResourceHandler("/dist/**")
+    		.addResourceLocations("/WEB-INF/static/dist/");
         /**
         registry.addResourceHandler("/vendor/bootstrap/css/**")
         	.addResourceLocations("/WEB-INF/static/vendor/bootstrap/css/");
@@ -78,6 +85,8 @@ public class DusWebConfig extends WebMvcConfigurerAdapter implements Application
         // Template cache is true by default. Set to false if you want
         // templates to be automatically updated when modified.
         templateResolver.setCacheable(true);
+        // 设置字符编码，解决中文乱码
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 
@@ -100,6 +109,42 @@ public class DusWebConfig extends WebMvcConfigurerAdapter implements Application
     public ThymeleafViewResolver viewResolver(){
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
+        
+        // 设置字符编码，解决中文乱码
+        viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
     }
+    
+    /**
+     * 支持json 格式的报文转换 
+     * @return
+     */
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+    	return new MappingJackson2HttpMessageConverter();
+    }
+    
+    /**
+     * 中文乱码，将iso-8859 转换为 utf-8  
+     * @return
+     */
+    @Bean
+    public StringHttpMessageConverter stringHttpMessageConverter() {
+    	StringHttpMessageConverter convert = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+    	//convert.DEFAULT_CHARSET
+    	return convert;
+    }
+    
+    /**
+     * 解决中文乱码 ， 使用 StringHttpMessageConverter(Charset.forName("UTF-8"));
+     * 支持json格式报文转换；
+     */
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		super.configureMessageConverters(converters);
+		converters.add(this.stringHttpMessageConverter());
+		converters.add(this.mappingJackson2HttpMessageConverter());
+	}
+	
+	
 }
