@@ -1,5 +1,6 @@
 package com.dus.dusframework.web.test;
 
+import org.junit.Test;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,5 +13,13 @@ import org.springframework.stereotype.Component;
 public class TestBean {
 	public TestBean() {
 		System.out.println("Construct TestBean!");
+	}
+	
+	@Test
+	public void test4Integer() {
+		Integer aa = null;
+		
+		System.out.println(aa <= 0);
+		System.out.println(aa > 0);
 	}
 }

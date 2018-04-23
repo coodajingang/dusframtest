@@ -33,7 +33,7 @@ public class RunContextUtil {
 	 * @return
 	 */
 	public static RunContext getCurrentRunContext() {
-		return runContext.get();
+		return (runContext.get() != null)? runContext.get() : createRunContext();
 	}
 
 	/**
@@ -200,6 +200,19 @@ public class RunContextUtil {
 	}
 	public static void setPageInfo(Page pageInfo) {
 		setValue(IContextConstants.CONTEXT_PAGEINFO, pageInfo);
+	}
+	
+	/**
+	 * 根据开始页码 和 每页数量 创建page ，置需要分页标志为true ； 并设置到上下文中；<br>
+	 * 等同于 ：  setPageInfo(Page pageInfo) and setNeedPage(true)
+	 * @param startPage
+	 * @param pageSize
+	 */
+	public static void setPageInfo(int startPage, int pageSize) {
+		Page pageInfo = new Page(startPage, pageSize);
+		
+		setValue(IContextConstants.CONTEXT_PAGEINFO, pageInfo);
+		setValue(IContextConstants.CONTEXT_NEEDPAGE, true);
 	}
 	
 	/**

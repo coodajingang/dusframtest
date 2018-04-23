@@ -127,11 +127,12 @@ public class PageMybatisInterceptor implements Interceptor{
 
     		log.debug("分页信息：" + pageInfo.toString());
     		
+    		/**
     		if (pageInfo.getStartPage() > pageInfo.getTotalPage()) {
     			log.info("当前请求页码大于总页码，直接返回空！");
     			throw new DBNotFoundException("请求页码大于总页码，查询为空！");
     		}
-    		
+    		**/
     		// 构造分页sql 
     		String pageSql = this.dialect.genPageSql(sql, pageInfo.getStartRecords(), pageInfo.getPageSize());
 

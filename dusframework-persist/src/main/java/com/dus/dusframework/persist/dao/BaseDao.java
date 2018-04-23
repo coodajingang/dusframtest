@@ -153,4 +153,32 @@ public abstract class BaseDao <T> extends SqlSessionDaoSupport implements IBaseD
 		}
 		
 	}
+	
+	/**
+	 * 查询列表 ， 当查询为空时不抛出异常  ， 返回null
+	 * <br>nothrowexp 为true时， 查询空不抛异常 ，返回null'
+	 * @param id
+	 * @param t
+	 * @param throwexp
+	 * @return
+	 */
+	public List<T> selectList(String id, Object t, boolean nothrowexp) {
+		try {
+			return getSqlSession().selectList(id, t);
+		} catch (NoPageInfoException noexp) {
+			log.error("数据库selectList操作:" + id + "异常!缺少分页信息！" , noexp);
+			throw noexp;
+		} catch (Exception exp) {
+			log.debug("异常类型：" + (exp instanceof DBNotFoundException));
+			log.debug(exp.getClass().getName());
+			if (exp instanceof DBNotFoundException && nothrowexp) {
+				log.info("查询结果为空！");
+				return null;
+			} else {
+				log.error("数据库selectList操作:" + id + "异常!" , exp);
+				throw new DBRuntimeException("数据库selectList操作:" + id + "异常!" , exp.getMessage());
+			}
+		}
+		
+	}
 }

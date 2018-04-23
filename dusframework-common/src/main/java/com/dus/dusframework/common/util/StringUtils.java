@@ -468,6 +468,7 @@ public final class StringUtils {
 		return string != null && string.length() > 0;
 	}
 
+	
 	/**
 	 * 给一个字符串添加前缀，添加后格式为prefix.name
 	 * 

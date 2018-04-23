@@ -12,11 +12,13 @@ public class DusDictBaseFieldDo extends BaseDo{
 	private String source;
 	private String remark;
 	private String fieldGroup;
+	private String begins;
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DusDictBaseFieldDo [chnName=" + chnName + ", engName=" + engName + ", abbreviate=" + abbreviate
+				+ ", baseType=" + baseType + ", source=" + source + ", remark=" + remark + ", fieldGroup=" + fieldGroup
+				+ ", begins=" + begins + "]";
 	}
 
 	public String getChnName() {
@@ -73,6 +75,14 @@ public class DusDictBaseFieldDo extends BaseDo{
 
 	public void setFieldGroup(String fieldGroup) {
 		this.fieldGroup = fieldGroup;
+	}
+
+	public String getBegins() {
+		return begins;
+	}
+
+	public void setBegins(String begins) {
+		this.begins = begins;
 	}
 
 	

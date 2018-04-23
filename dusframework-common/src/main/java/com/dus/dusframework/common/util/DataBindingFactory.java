@@ -13,7 +13,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.SchemaFactory;
 
-import org.apache.log4j.spi.ErrorCode;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
