@@ -15,7 +15,8 @@ public class DusDictBaseFieldDao extends BaseDao<DusDictBaseFieldDo>{
 
 	/**
 	 * 查询字典基本字段表， 模糊查询  ； 
-	 * 根据中文名称、英文名称、字段缩写分别模糊匹配
+	 * 根据中文名称、英文名称、字段缩写分别模糊匹配 
+	 * 
 	 * @param str
 	 * @return
 	 */
