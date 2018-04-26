@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.dus.dusframework.web.dao.DusDictBaseDomainGroupDao">
+
+	<select id="selectByPk" parameterType="String"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseDomainGroupDo">
+		select * from DUSDICT_BASE_DOMAIN_GROUP 
+			where domain_group = #{domainGroup}
+	</select>
+	
+	<select id="selectAllGroup" 
+		resultType="com.dus.dusframework.web.domain.DusDictBaseDomainGroupDo">
+		select * from DUSDICT_BASE_DOMAIN_GROUP
+	</select>
+	
+	<select id="checkRepeat" parameterType="com.dus.dusframework.web.domain.DusDictBaseDomainGroupDo"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		select * from DUSDICT_BASE_DOMAIN_GROUP
+		where
+			chn_name = #{chnName} 
+			and eng_name = #{engName}
+			and Abbreviate = #{abbreviate}
+	</select>
+	<insert id = "insert" parameterType="com.dus.dusframework.web.domain.DusDictBaseDomainGroupDo">
+		insert into DUSDICT_BASE_DOMAIN_GROUP (
+			domain_group,
+			domain_group_seqno,
+			business_define,
+			remark,
+			busi_date,
+			tms,
+			vno
+		   )
+		 Values (
+			#{domainGroup},
+			#{domainGroupSeqno},
+			#{businessDefine},
+			#{remark},
+			#{busiDate},
+			#{tms},
+			#{vno}
+			)
+	</insert>
+</mapper>

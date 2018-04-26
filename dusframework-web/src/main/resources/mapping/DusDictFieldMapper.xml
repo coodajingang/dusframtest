@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.dus.dusframework.web.dao.DusDictFieldDao">
+
+
+	<select id="searchLikeByPage" parameterType="Map"
+		resultType="com.dus.dusframework.web.domain.DusDictFieldDo">
+		select * from DUSDICT_FIELD
+		<where>
+			<if test="field != null">
+				domain_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or eng_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or java_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or chn_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or domain_group like CONCAT(CONCAT('%',#{field}),'%')
+			</if>
+		</where>
+	</select>
+	<delete id="deleteBySeqAndName" parameterType="com.dus.dusframework.web.domain.DusDictFieldDo">
+		delete from DUSDICT_FIELD 
+		where 
+			seq_no =  #{seqNo}
+			and eng_name =  #{engName}
+			and chn_name =  #{chnName}
+	</delete>
+	<update id="updateDictFieldInfo2222" parameterType="com.dus.dusframework.web.domain.DusDictFieldDo">
+		update DUSDICT_FIELD 
+		set
+			<if test="seqNo != null">
+			seq_no =  #{seqNo},
+			</if>
+			<if test="engName != null">
+			eng_name =  #{engName},
+			</if>
+			<if test="chnName != null">
+			chn_name =  #{chnName},
+			</if>
+			<if test="engFullName != null">
+			eng_full_name =  #{engFullName},
+			</if>
+			<if test="businessDefine != null">
+			business_define =  #{businessDefine},
+			</if>
+			<if test="source != null">
+			source =  #{source},
+			</if>
+			<if test="dataType != null">
+			data_type =  #{dataType},
+			</if>
+			<if test="dataFormat != null">
+			data_format =  #{dataFormat},
+			</if>
+			<if test="domainName != null">
+			domain_name =  #{domainName},
+			</if>
+			<if test="domainSeqno != null">
+				domain_seqno =  #{domainSeqno},
+			</if>
+			<if test="domainGroup != null">
+				domain_group =  #{domainGroup},
+			</if>
+			<if test="javaType != null">
+				java_type =  #{javaType},
+			</if>
+			<if test="javaName != null">
+				java_name =  #{javaName},
+			</if>
+			<if test="oracleType != null">
+				oracle_type =  #{oracleType},
+			</if>
+			<if test="jdbcType != null">
+				jdbc_type =  #{jdbcType},
+			</if>
+			<if test="submitter != null">
+				submitter =  #{submitter},
+			</if>
+			<if test="submitTime != null">
+				submit_time =  #{submitTime},
+			</if>
+			<if test="confirmer != null">
+				confirmer =  #{confirmer},
+			</if>
+			<if test="confirmTime != null">
+				confirm_time =  #{confirmTime},
+			</if>
+			<if test="remark != null">
+				remark =  #{remark},
+			</if>
+			<if test="busiDate != null">
+				busi_date =  #{busiDate},
+			</if>
+			tms = sysdate,
+			vno = vno +1 
+		where 
+			seq_no =  #{seqNo}
+			
+	</update>
+	
+	<update id="updateDictFieldInfo" parameterType="com.dus.dusframework.web.domain.DusDictFieldDo">
+		update DUSDICT_FIELD 
+		set
+			eng_name = #{engName},
+			chn_name = #{chnName},
+			eng_full_name = #{engFullName},
+			business_define = #{businessDefine},
+			source = #{source},
+			data_type = #{dataType},
+			data_format = #{dataFormat},
+			domain_name = #{domainName},
+			domain_seqno = #{domainSeqno},
+			domain_group = #{domainGroup},
+			java_type = #{javaType},
+			java_name = #{javaName},
+			oracle_type = #{oracleType},
+			jdbc_type = #{jdbcType},
+			submitter = #{submitter},
+			submit_time = #{submitTime},
+			confirmer = #{confirmer},
+			confirm_time = #{confirmTime},
+			remark = #{remark},
+			busi_date = #{busiDate},
+			tms = sysdate,
+			vno = vno +1 
+		where 
+			seq_no =  #{seqNo}
+	</update>
+	<select id="checkRepeat" parameterType="com.dus.dusframework.web.domain.DusDictFieldDo"
+		resultType="com.dus.dusframework.web.domain.DusDictFieldDo">
+		select * from DUSDICT_FIELD
+		where
+			chn_name = #{chnName} 
+			and eng_name = #{engName}
+			and Abbreviate = #{abbreviate}
+	</select>
+	<insert id = "insert" parameterType="com.dus.dusframework.web.domain.DusDictFieldDo">
+		<selectKey  keyProperty="seqNo" order="BEFORE" resultType="Long">  
+            select (nvl(max(seq_no),0) + 1) as seqNo  from DUSDICT_FIELD
+        </selectKey>
+		insert into DUSDICT_FIELD (
+			seq_no,
+			eng_name,
+			chn_name,
+			eng_full_name,
+			business_define,
+			source,
+			data_type,
+			data_format,
+			domain_name,
+			domain_seqno,
+			domain_group,
+			java_type,
+			java_name,
+			oracle_type,
+			jdbc_type,
+			submitter,
+			submit_time,
+			confirmer,
+			confirm_time,
+			remark,
+			busi_date,
+			tms,
+			vno
+		   )
+		 Values (
+			#{seqNo},
+			#{engName},
+			#{chnName},
+			#{engFullName},
+			#{businessDefine},
+			#{source},
+			#{dataType},
+			#{dataFormat},
+			#{domainName},
+			#{domainSeqno},
+			#{domainGroup},
+			#{javaType},
+			#{javaName},
+			#{oracleType},
+			#{jdbcType},
+			#{submitter},
+			#{submitTime},
+			#{confirmer},
+			#{confirmTime},
+			#{remark},
+			#{busiDate},
+			sysdate,
+			1
+			)
+	</insert>
+</mapper>

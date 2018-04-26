@@ -58,7 +58,7 @@ public abstract class BaseDao <T> extends SqlSessionDaoSupport implements IBaseD
 		return this.delete(this.getNamespace() + ".deleteByPk", t);
 	}
 	
-	private int delete(String id, Object t) {
+	public int delete(String id, Object t) {
 		try {
 			return getSqlSession().delete(id, t);
 		} catch (Exception exp) {
@@ -81,7 +81,7 @@ public abstract class BaseDao <T> extends SqlSessionDaoSupport implements IBaseD
 		return this.update(this.getNamespace() + ".updateByPk", t);
 	}
 	
-	private int update(String id, Object t) {
+	public int update(String id, Object t) {
 		try {
 			return getSqlSession().update(id, t);
 		} catch (Exception exp) {
@@ -99,9 +99,17 @@ public abstract class BaseDao <T> extends SqlSessionDaoSupport implements IBaseD
 	}
 
 	/**
+	 * 按主键查询  ， 查询为空时不抛出异常  ！
+	 */
+	public T selectByPk(T t) {
+		//System.out.println("sqlID=" + this.getNamespace() + ".selectByPk");
+		return this.selectByPk(t, false);
+	}
+	
+	/**
 	 * 按主键查询  ， 查询为空时按需要抛出异常  ！
 	 */
-	public T selectByPk(Map map, boolean expWhenNoData) {
+	public T selectByPk(Object map, boolean expWhenNoData) {
 		//System.out.println("sqlID=" + this.getNamespace() + ".selectByPk");
 		return this.selectOne(this.getNamespace() + ".selectByPk", map, expWhenNoData);
 	}

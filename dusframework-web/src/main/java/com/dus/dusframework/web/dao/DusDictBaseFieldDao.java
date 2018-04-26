@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import com.dus.dusframework.persist.dao.BaseDao;
 import com.dus.dusframework.web.domain.DusDictBaseFieldDo;
 
 @Component
-public class DusDictBaseFieldDao extends BaseDao<DusDictBaseFieldDo>{ 
+public class DusDictBaseFieldDao extends BaseDao<DusDictBaseFieldDo> { 
 
 	/**
 	 * 查询字典基本字段表， 模糊查询  ； 

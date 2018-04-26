@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="0;url=dictManager.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -12,16 +12,22 @@
     <title>DictManager</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/bootstrap3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
+    <!-- DataTables CSS  vendor/datatables-plugins/dataTables.bootstrap.css -->
+    <link href="dist/datatable1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="dist/datatable1.10.15/extensions/Responsive/css/responsive.dataTables.min.css" rel="stylesheet">
+    
+    <!-- 表单验证 CSS -->
+    <link href="dist/bootstrapValidator0.5.3/dist/css/bootstrapValidator.min.css" rel="stylesheet">
+    
     <!-- Custom CSS -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="vendor/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->  
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -32,7 +38,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script language="javascript">
+    window.location.href = "dictManager.html"
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -40,29 +48,34 @@
 	
 	<div id="page-wrapper">
 		<div class="row">  
-			Go to <a href="world.html">/pages/world.html</a>
-
-		<p th:utext="adsfadf + ${home}">Welcome to our grocery store!</p>
+				Go to <a href="dictManager.html"></a>
 		</div>
 	</div>
 
 </div>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+	<!-- vendor/jquery/jquery.min.js /dusframework-web/src/main/webapp/WEB-INF/static/dist/datatable1.10.15/js/jquery.js-->
+    <script src="dist/datatable1.10.15/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="dist/bootstrap3.3.7/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="vendor/raphael/raphael.min.js"></script>
-    <script src="vendor/morrisjs/morris.min.js"></script>
-    <script src="data/morris-data.js"></script>
-
-    <!-- Custom Theme JavaScript -->
+    <!-- DataTables JavaScript  vendor/datatables/js/jquery.dataTables.min.js vendor/datatables-plugins/dataTables.bootstrap.min.js  -->
+   <!--  
+    <script src="http://cdn.gbtags.com/datatables/1.10.5/js/jquery.dataTables.min.js"></script>
+    <script src="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
+    -->
+    <script src="dist/datatable1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="dist/datatable1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="dist/datatable1.10.15/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    
+    <!-- 表单验证js -->
+    <script src="dist/bootstrapValidator0.5.3/dist/js/bootstrapValidator.min.js"></script>
+    
     <script src="js/sb-admin-2.js"></script>
 </body>
 </html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>字典管理</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="dist/bootstrap3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS  vendor/datatables-plugins/dataTables.bootstrap.css -->
+    <link href="dist/datatable1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="dist/datatable1.10.15/extensions/Responsive/css/responsive.dataTables.min.css" rel="stylesheet">
+    
+    <!-- 表单验证 CSS -->
+    <link href="dist/bootstrapValidator0.5.3/dist/css/bootstrapValidator.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->  
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<style>
+		.cus_selected {
+			color:cyan;
+		}
+	</style>
+</head>
+<body>
+<div id="wrapper">
+	<nav th:replace="navigate :: nav"></nav>
+	
+	<div id="page-wrapper">
+            <!-- <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">基础字典字段管理</h1>
+                </div>
+               
+            </div> -->
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2"> 
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        	字典新增
+                        </div>
+                        <div class="row-fluid">
+                        <!-- /.panel-heading class="table table-striped table-bordered table-hover"  -->
+                        <div class="panel-body">
+             <form id="baseModalForm">
+				<div class="form-group">
+					<label>请选择域组</label>
+					<select class="form-control" id="domainGroup" name="domainGroup">
+						<option  th:each="list, listStat:${domainGroupList}" th:value="${list.domainGroup}" th:text="${list.domainGroup }"></option>
+					</select>
+				</div>
+				<div class="form-group input-group">
+					<input type="text" class="form-control" id="domainName"  name="domainName" placeholder="数据域" >
+					<span class="input-group-btn">
+						<button id="domainSearchBtn" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+					<input type="text" class="form-control hidden" id="domainSeqno"  name="domainSeqno" placeholder="数据域序号" >
+				</div>
+
+				<div class="form-group">
+					<label>数据类别</label>
+					<input type="text" class="form-control" id="dataType"  name="dataType" placeholder="数据类别">
+				</div>
+				<div class="form-group">
+					<label>数据格式</label>
+					<input type="text" class="form-control" id="dataFormat"  name="dataFormat" placeholder="数据格式">
+				</div>
+				<div class="form-group">
+					<label>中文名称</label>
+					<input type="text" class="form-control" id="chnName"  name="chnName" placeholder="中文名称并翻译"><!--  -->
+					<span class="input-group-btn">
+						<button id="translationBtn" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+				</div>
+				<div class="form-group">
+					<label>英文名称</label>
+					<input type="text" class="form-control" id="engFullName"  name="engFullName" placeholder="英文名称">
+				</div>
+				<div class="form-group">
+					<label>英文简称</label>
+					<input type="text" class="form-control" id="engName"  name="engName" placeholder="英文简称">
+				</div>
+				<div class="form-group">
+					<label>业务定义</label>
+					<input type="text" class="form-control" id="businessDefine"  name="businessDefine" placeholder="业务定义">
+				</div>
+				<div class="form-group">
+					<label>jdbc数据类型</label>
+					<select class="form-control" id="jdbcType" name="jdbcType">
+						<option  th:each="list, listStat:${jdbcTypeList}" th:value="${list}" th:text="${list}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>java数据类型</label>
+					<select class="form-control" id="javaType" name="javaType">
+						<option  th:each="list, listStat:${javaTypeList}" th:value="${list}" th:text="${list}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>java命名</label>
+					<input type="text" class="form-control" id="javaName"  name="javaName" placeholder="java命名规范">
+				</div>
+				<div class="form-group">
+					<label>oracle数据类型</label>
+					<input type="text" class="form-control" id="oracleType"  name="oracleType" placeholder="oracle数据类型">
+				</div>
+				<div class="form-group">
+					<label>提交人</label>
+					<input type="text" class="form-control" id="submitter"  name="submitter" placeholder="提交人">
+				</div>
+				<div class="form-group">
+					<label>提交时间</label>
+					<input type="text" class="form-control" id="submitTime"  name="submitTime" placeholder="提交时间">
+				</div>
+				<div class="form-group">
+					<label>审核人</label>
+					<input type="text" class="form-control" id="confirmer"  name="confirmer" placeholder="审核人">
+				</div>
+				<div class="form-group">
+					<label>审核时间</label>
+					<input type="text" class="form-control" id="confirmTime"  name="confirmTime" placeholder="审核时间">
+				</div>
+				<div class="form-group">
+					<label>来源</label>
+					<input type="text" class="form-control" id="source"  name="source" placeholder="来源" value="内部">
+				</div>
+				<div class="form-group">
+					<label>备注</label>
+					<input type="text" class="form-control" id="remark"  name="remark" placeholder="备注">
+				</div>
+               </form>
+ 
+            <div class="row">
+                <span id="returnMessage" class="glyphicon"> </span>
+                <button type="button" class="btn btn-primary" id="resetBtn">重置</button>
+                <button type="button" class="btn btn-primary" id="saveBtn">保存</button>
+            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+	</div>
+</div>
+</div>
+
+<!-- 选择域信息  Modal -->
+<div class="modal fade" id="selectDomainModal" tabindex="-1" role="dialog" aria-labelledby="selectDomainModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="selectDomainModalLabel">域选择</h4>
+            </div>
+            	<div class="modal-body">
+                     <table width="100%" class="table table-striped table-bordered table-hover" id="domainTable">
+                         <thead>
+                             <tr>
+                               <th>域中文名称</th>
+                               <th>域名称</th>
+                               <th>域编号</th>
+                               <th>域组</th>
+                               <th>数据类型</th>
+                               <th>数据格式</th>
+                               <th>数据范围</th>
+                               <th>业务定义</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                         </tbody>
+                     </table>
+            	</div>
+            <div class="modal-footer">
+                <span id="returnMessageDelete" class="glyphicon"> </span>
+                <button type="button" class="btn btn-default" data-dismiss="modal"> 关闭</button>
+                <button type="button" class="btn btn-primary" id="selectBtn"> 选择</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 翻译基本词汇  Modal -->
+<div class="modal fade" id="transFieldModal" tabindex="-1" role="dialog" aria-labelledby="transFieldModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="transFieldModalLabel">基本词汇翻译</h4>
+            </div>
+            	<div class="modal-body ">
+            	<div class="row">
+            		<input type="text" class="form-control" id="transName"  name="transName" readonly>
+            		<input type="text" class="form-control hidden" id="transChnName"  name="transChnName" readonly>
+                	<input type="text" class="form-control hidden" id="transEngName"  name="transEngName" readonly>
+            	</div>
+
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="transBaseFieldTable">
+                                <thead>
+                                    <tr>
+                                    	<!-- 
+                                        <th>序号</th> -->
+                                        <th>中文名称</th>
+                                        <th>英文名称</th>
+                                        <th>缩写</th>
+                                        <th>属组</th>
+                                        <th>来源</th>
+                                        <th>备注</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+            	</div>
+
+            <div class="modal-footer">
+                <span id="returnMessageTrans" class="glyphicon"> </span>
+                <button type="button" class="btn btn-default" data-dismiss="modal"> 关闭</button>
+                <button type="button" class="btn btn-primary" id="transBtn"> 选择</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- vendor/jquery/jquery.min.js /dusframework-web/src/main/webapp/WEB-INF/static/dist/datatable1.10.15/js/jquery.js-->
+    <script src="dist/datatable1.10.15/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="dist/bootstrap3.3.7/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="dist/datatable1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="dist/datatable1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="dist/datatable1.10.15/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    
+    <!-- 表单验证js -->
+    <script src="dist/bootstrapValidator0.5.3/dist/js/bootstrapValidator.min.js"></script>
+    
+    <script src="js/sb-admin-2.js"></script>
+
+    <script>
+    
+    	// domainTable 初始化  
+    	var domainTable =  $('#domainTable').DataTable({
+    		responsive: true ,
+            serverSide:true,
+            ajax: {
+                url: 'searchBaseDomains.json',
+                dataSrc: 'data',
+                //type: "POST",
+                //contentType:'application/json; charset=UTF-8'
+            },
+            language: {
+                 "sProcessing": "处理中...",
+                 "sLengthMenu": "显示 _MENU_ 项结果",
+                 "sZeroRecords": "没有匹配结果",
+                 "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                 "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                 "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                 "sInfoPostFix": "",
+                 "sSearch": "过滤:",
+                 "sUrl": "",
+                 "sEmptyTable": "表中数据为空",
+                 "sLoadingRecords": "载入中...",
+                 "sInfoThousands": ",",
+                 "oPaginate": {
+                     "sFirst": "首页",
+                     "sPrevious": "上页",
+                     "sNext": "下页",
+                     "sLast": "末页"
+                 },
+                 "oAria": {
+                     "sSortAscending": ": 以升序排列此列",
+                     "sSortDescending": ": 以降序排列此列"
+                 }
+             },
+             columns: [
+                 //{"data": "senqo"}, //因为要加行号，所以要多一列，不然会把第一列覆盖
+                 {"data": "domainChnName"},
+                 {"data": "domainName"},
+                 {"data": "domainSeqno"},
+                 {"data": "domainGroup"},
+                 {"data": "dataType"},
+                 {"data": "dataFormat"},
+                 {"data": "dataScope"},
+                 {"data": "businessDefine"}
+             ],
+             columnDefs: [
+                 {
+                 	// 所有的列不允许排序
+                     "orderable": false,
+                     "targets": "_all"
+                 }
+             ],
+             //dom:"lrtip" 
+             dom: "<'row'<'#mytool.col-xs-8'><'col-xs-4'l>r>" +
+             "t" +
+             "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+             // 添加几个按钮 和 搜索框  
+     		initComplete: function () {
+         		//$("#mytool2").append('<button id="datainit" type="button" class="btn btn-primary btn-sm">新增</button>');
+         		//$("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">添加</button>');
+         		$("#mytool").append('<div class="form-group">' +
+ 		                           '<div class="input-group">' +
+ 		                                 '<input id="searchinput" type="search"  placeholder="请输入关键字" class="form-control">'
+ 		                                + '<span class="input-group-btn">  '
+                                         + '<button id="searchbutton" type="button" class="btn btn-sm btn-primary"> 搜索</button></span>'
+ 		                          + '</div>'
+ 		                    + '</div>');
+
+         		$("#searchbutton").on("click", function () {
+ 					var str = $("#searchinput").val();
+ 					domainTable.search(str).draw();
+ 				});
+     		}
+    	});
+    
+    	// 添加搜索domain事件 
+    	// 根据选择的域组显示域信息， 选择填入 
+	$("#domainSearchBtn").click(function () {
+		var group = $("#domainGroup").val();
+		
+		   if (typeof(group) == "undefined" || group == "") {
+			   alert("请先选择域组!");
+		   } else {
+			   // 根据选择的域组 ， 显示对话框 ， 选择域组下的域信息 
+			   $("#searchinput").val(group);
+			   $("#selectDomainModal").modal("show");
+			   domainTable.search(group).draw();
+		   } 
+	});
+
+	
+   // 新增基本字段模态框modal初始化开始----
+   // modal form validate script
+   var form = $('#baseModalForm');
+   form.bootstrapValidator({
+       message: '输入值不合法',
+       excluded:[":disabled",":hidden",":not(:visible)"],
+       feedbackIcons: {
+           valid: 'glyphicon glyphicon-ok',
+           invalid: 'glyphicon glyphicon-remove',
+           validating: 'glyphicon glyphicon-refresh'
+       },
+       fields: {
+    		   engName: {
+    		   message:'英文简称不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '英文简称不能为空'
+    		   }
+    		   }
+    		   },
+    		   chnName: {
+    		   message:'中文名称不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '中文名称不能为空'
+    		   }
+    		   }
+    		   },
+    		   engFullName: {
+    		   message:'英文名称不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '英文名称不能为空'
+    		   }
+    		   }
+    		   },
+    		   businessDefine: {
+    		   message:'业务定义不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '业务定义不能为空'
+    		   }
+    		   }
+    		   },
+    		   source: {
+    		   message:'来源不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '来源不能为空'
+    		   }
+    		   }
+    		   },
+    		   dataFormat: {
+    		   message:'数据格式不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '数据格式不能为空'
+    		   }
+    		   }
+    		   },
+    		   domainName: {
+    		   message:'数据域不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '数据域不能为空'
+    		   }
+    		   }
+    		   },
+    		   domainSeqno: {
+    		   message:'数据域序号不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '数据域序号不能为空'
+    		   }
+    		   }
+    		   },
+    		   domainGroup: {
+    		   message:'数据域组不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: '数据域组不能为空'
+    		   }
+    		   }
+    		   },
+    		   javaType: {
+    		   message:'java数据类型不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: 'java数据类型不能为空'
+    		   }
+    		   }
+    		   },
+    		   javaName: {
+    		   message:'java命名规范不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: 'java命名规范不能为空'
+    		   }
+    		   }
+    		   },
+    		   oracleType: {
+    		   message:'oracle数据类型不合法',
+    		   validators: {
+    		   notEmpty: {
+    		   message: 'oracle数据类型不能为空'
+    		   }
+    		   }
+    		   }
+       }
+   });
+   
+   // 处理datatable select 显示 
+   $('#domainTable tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('warning') ) {
+            $(this).removeClass('warning');
+        }
+        else {
+        	$('#domainTable').DataTable().$('tr.warning').removeClass('warning');
+            $(this).addClass('warning');
+        }
+
+    } );
+   
+   // 检查是否有选择行 
+   function checkRowSelected() {
+	   var selected = $('#domainTable').DataTable().row('.warning').data();
+	   console.log(selected);
+	   
+	   if (typeof(selected) == "undefined") {
+		   alert("Please select one Row!");
+		   return false;
+	   } else {
+		   //alert($('#example').DataTable().row('.warning').data().domainName);
+		   return true;
+	   } 
+   }
+   
+   // 不同的button 初始化相应的modal
+   function initMyModal(labText, labButton, data, keepSource) {
+       $("#myModalLabel").text(labText);
+
+       if (keepSource) {
+    	   $("#seqNo").val(data.seqNo == null?"":data.seqNo);
+    	   $("#engName").val(data.engName == null?"":data.engName);
+    	   $("#chnName").val(data.chnName == null?"":data.chnName);
+    	   $("#engFullName").val(data.engFullName == null?"":data.engFullName);
+    	   $("#businessDefine").val(data.businessDefine == null?"":data.businessDefine);
+    	   $("#source").val(data.source == null?"":data.source);
+    	   $("#dataType").val(data.dataType == null?"":data.dataType);
+    	   $("#dataFormat").val(data.dataFormat == null?"":data.dataFormat);
+    	   $("#domainName").val(data.domainName == null?"":data.domainName);
+    	   $("#domainSeqno").val(data.domainSeqno == null?"":data.domainSeqno);
+    	   $("#domainGroup").val(data.domainGroup == null?"":data.domainGroup);
+    	   $("#javaType").val(data.javaType == null?"":data.javaType);
+    	   $("#javaName").val(data.javaName == null?"":data.javaName);
+    	   $("#oracleType").val(data.oracleType == null?"":data.oracleType);
+    	   $("#jdbcType").val(data.jdbcType == null?"":data.jdbcType);
+    	   $("#submitter").val(data.submitter == null?"":data.submitter);
+    	   $("#submitTime").val(data.submitTime == null?"":data.submitTime);
+    	   $("#confirmer").val(data.confirmer == null?"":data.confirmer);
+    	   $("#confirmTime").val(data.confirmTime == null?"":data.confirmTime);
+    	   $("#remark").val(data.remark == null?"":data.remark);
+       } else {
+    	   $("#seqNo").val("");
+    	   $("#engName").val("");
+    	   $("#chnName").val("");
+    	   $("#engFullName").val("");
+    	   $("#businessDefine").val("");
+    	   $("#source").val("");
+    	   $("#dataType").val("");
+    	   $("#dataFormat").val("");
+    	   $("#domainName").val("");
+    	   $("#domainSeqno").val("");
+    	   $("#domainGroup").val("");
+    	   $("#javaType").val("");
+    	   $("#javaName").val("");
+    	   $("#oracleType").val("");
+    	   $("#jdbcType").val("");
+    	   $("#submitter").val("");
+    	   $("#submitTime").val("");
+    	   $("#confirmer").val("");
+    	   $("#confirmTime").val("");
+    	   $("#remark").val("");
+       }
+
+       // 响应信息清空
+       $("#returnMessage").hide().html('');
+       // 按钮名称
+       $("#saveBtn").text(labButton);
+       // 显示模态对话框
+       $("#myModal").modal("show");
+   }
+   
+   // 域选择modal中的 选择按钮事件 
+   $("#selectBtn").click(function () {
+	   if (checkRowSelected()) {
+		   var data = $('#domainTable').DataTable().row('.warning').data();
+		   $("#domainName").val(data.domainName);
+		   $("#domainSeqno").val(data.domainSeqno);
+		   $("#dataType").val(data.dataType);
+		   $("#dataFormat").val(data.dataFormat);
+		   
+		   // 关闭modal框 
+		   $("#selectDomainModal").modal('hide');
+	   }
+   });
+   
+   $("#jdbcType").on("change", function() {
+	   $("#oracleType").val($("#jdbcType").val() +"()");
+   });
+   // input 重置按钮 
+   $("#resetBtn").click(function () {
+   	   $("#engName").val("");
+	   $("#chnName").val("");
+	   $("#engFullName").val("");
+	   $("#businessDefine").val("");
+	   $("#source").val("内部");
+	   $("#dataType").val("");
+	   $("#dataFormat").val("");
+	   $("#domainName").val("");
+	   $("#domainSeqno").val("");
+	   $("#javaType").val("");
+	   $("#javaName").val("");
+	   $("#oracleType").val("");
+	   $("#jdbcType").val("");
+	   $("#submitter").val("");
+	   $("#submitTime").val("");
+	   $("#confirmer").val("");
+	   $("#confirmTime").val("");
+	   $("#remark").val("");
+   });
+   
+
+   // input 中保存按钮事件  
+   $("#saveBtn").click(function () {
+       //进行表单验证
+       var bv = form.data('bootstrapValidator');
+       bv.validate();
+       if (bv.isValid()) {
+           	$('#baseModalForm input').attr('readonly',"true");
+			$('#saveBtn').attr('disabled',"true");
+			//var oridata = $('#example').DataTable().row('.warning').data();
+           //发送ajax请求
+           $.ajax({
+               url: 'saveDictField.json',
+               async: false,//同步，会阻塞操作
+               type: 'GET',//PUT DELETE POST
+               data: form.serialize(),
+               complete: function (msg) {
+                   //console.log('完成了');
+               },
+               success: function (result) {
+                   //console.log(result);
+                   if (result && result["code"] == "000000") {
+                	   $("#returnMessage").hide().html('<label class="label label-success">成功!</label>').show(300);
+                	   // 成功后 内容不再 不允许修改 
+                   } else {
+                       $("#returnMessage").hide().html('<label class="label label-danger">失败!' + result["resinfo"] + '</label>').show(300);
+                      	$('#baseModalForm input').removeAttr("readonly"); 
+            			$('#saveBtn').removeAttr("disabled"); 
+                   }
+               }, 
+               error: function () {
+                   $("#returnMessage").hide().html('<label class="label label-danger">失败!</label>').show(300);
+                 	$('#baseModalForm input').removeAttr("readonly"); 
+        			$('#saveBtn').removeAttr("disabled"); 
+               }
+           })
+       }
+   });
+ 	
+   var transTable = $('#transBaseFieldTable').DataTable({
+       responsive: true ,
+       serverSide:true,
+       ajax: {
+           url: 'searchBaseField.json',
+           dataSrc: 'data'
+           //type: "POST",
+           //contentType:'application/json; charset=UTF-8'
+       },
+       language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "过滤:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        },
+        columns: [
+            //{"data": "senqo"}, //因为要加行号，所以要多一列，不然会把第一列覆盖
+            {"data": "chnName"},
+            {"data": "engName"},
+            {"data": "abbreviate"},
+            {"data": "fieldGroup"},
+            {"data": "source"},
+            {"data": "remark"}
+        ],
+        columnDefs: [
+            {
+            	// 所有的列不允许搜索
+                "orderable": false,
+                "targets": "_all"
+            },
+            {
+            	// 最后一列 不可过滤搜索
+                "targets": [3,4,5],
+                "searchable":false,
+                "visible": false
+            }
+        ],
+        //dom:"lrtip" 
+        dom: "<'row'<'#mytooladd22.col-xs-6'><'#mytool22.col-xs-6'>r>" +
+        "t" +
+        "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+        // 添加几个按钮 和 搜索框  
+		initComplete: function () {
+    		//$("#mytool2").append('<button id="datainit" type="button" class="btn btn-primary btn-sm">新增</button>');
+    		//$("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">添加</button>');
+    		$("#mytool22").append('<div class="form-group">' +
+	                           '<div class="input-group">' +
+	                                 '<input id="searchinput2" type="search"  placeholder="请输入关键字" class="form-control">'
+	                                + '<span class="input-group-btn">'
+                                    + '<button id="searchbutton2" type="button" class="btn btn-sm btn-primary">搜索</button></span>'
+	                          + '</div>'
+	                    + '</div>');
+    		$("#mytooladd22").append('<div class="form-group">'
+                   + '<button id="addTransBtn" type="button" class="btn btn-primary btn-sm" > 添加翻译 </button>'
+                   + '<button id="deleteTransBtn" type="button" class="btn btn-primary btn-sm" > 回退翻译 </button>'
+                   + '<button id="compleateTransBtn" type="button" class="btn btn-primary btn-sm" > 完成翻译 </button>'
+             	+ '</div>');
+    		$("#searchbutton2").on("click", function () {
+				var str = $("#searchinput2").val();
+				transTable.search(str).draw();
+			});
+    		
+    		$("#addTransBtn").on("click", addTransBtn);
+    		$("#deleteTransBtn").on("click", deleteTransBtn);
+    		$("#compleateTransBtn").on("click", compleateTransBtn);
+		}
+    });
+   
+   // 翻译 button 显示翻译对话框modal 并设置搜索词汇 进行搜索 
+   $("#translationBtn").click(function() {
+		var searchName = $("#baseModalForm #chnName").val();
+		
+		if (typeof(searchName) == "undefined" ) {
+			searchName = "";
+		}
+		
+		$("#transName").val("");
+		$("#transChnName").val("");
+		$("#transEngName").val("");
+		
+		// 根据选择的域组 ， 显示对话框 ， 选择域组下的域信息 
+		$("#searchinput2").val(searchName);
+		$("#transFieldModal").modal("show");
+		transTable.search(searchName).draw();
+   });
+   
+   // 处理datatable select 显示 
+   $('#transBaseFieldTable tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('warning') ) {
+            $(this).removeClass('warning');
+        }
+        else {
+        	$('#transBaseFieldTable').DataTable().$('tr.warning').removeClass('warning');
+            $(this).addClass('warning');
+        }
+
+    } );
+   
+   // 检查是否有选择行 
+   function checkRowSelectedTrans() {
+	   var selected = $('#transBaseFieldTable').DataTable().row('.warning').data();
+	   console.log(selected);
+	   
+	   if (typeof(selected) == "undefined") {
+		   alert("Please select one Row!");
+		   return false;
+	   } else {
+		   return true;
+	   } 
+   }
+   
+   // 选择的基本字段 ，选择添加到翻译中  
+   function addTransBtn() {
+	   if (checkRowSelectedTrans()) {
+		   var selected = $('#transBaseFieldTable').DataTable().row('.warning').data();
+		   var oldTransName = $("#transName").val();
+		   var oldTransChnName = $("#transChnName").val();
+		   var oldTransEngName = $("#transEngName").val();
+		   
+		   if (typeof(oldTransName) == "undefined" || oldTransName.length ==0 ) {
+				$("#transName").val(selected.abbreviate);
+				$("#transChnName").val(selected.chnName);
+				$("#transEngName").val(selected.engName);
+		   } else {
+				$("#transName").val(oldTransName + "_" + selected.abbreviate);
+				$("#transChnName").val(oldTransChnName + "_" + selected.chnName);
+				$("#transEngName").val(oldTransEngName + "_" + selected.engName);
+		   }
+		   
+	   }
+   }
+   
+   // 回退一个上次翻译的结果 
+   function deleteTransBtn() {
+	   var oldTransName = $("#transName").val();
+	   var oldTransChnName = $("#transChnName").val();
+	   var oldTransEngName = $("#transEngName").val();
+	   
+		$("#transName").val(backToNextSlice(oldTransName));
+		$("#transChnName").val(backToNextSlice(oldTransChnName));
+		$("#transEngName").val(backToNextSlice(oldTransEngName));
+   }
+   
+   // 回退字符到最后一个_
+   function backToNextSlice(name) {
+	   if (typeof(name) == "undefined" || name.length == 0) {
+		   return "";
+	   }
+	   return name.substring(0, name.lastIndexOf("_"));
+   }
+   
+   // 将字符串中的_ 替换为空格 
+   function replaceWithSpace(name, rstr) {
+	   if (typeof(name) == "undefined" || name.length == 0) {
+		   return "";
+	   }
+	   return name.replace(/_/g, rstr);
+   }
+   
+   // 完成翻译时 事件  
+   function compleateTransBtn() {
+	   $("#baseModalForm #chnName").val(replaceWithSpace($("#transChnName").val(), ""));
+	   $("#baseModalForm #engName").val($("#transName").val());
+	   $("#baseModalForm #engFullName").val(replaceWithSpace($("#transEngName").val(), " "));
+	   $("#transFieldModal").modal("hide");
+   }
+    </script>
+</body>
+</html>

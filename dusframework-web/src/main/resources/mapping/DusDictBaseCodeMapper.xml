@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.dus.dusframework.web.dao.DusDictBaseCodeDao">
+
+	<select id="searchLike" parameterType="String"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		select * from DUSDICT_BASE_Code 
+			where chn_name like #{str}
+	</select>
+	
+	<select id="searchLikeByPage" parameterType="Map"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		select * from DUSDICT_BASE_Code
+		<where>
+			<if test="field != null">
+				domain_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or code like CONCAT(CONCAT('%',#{field}),'%')
+				 or java_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or code_name like CONCAT(CONCAT('%',#{field}),'%')
+			</if>
+		</where>
+	</select>
+	<delete id="deleteByDomainCode" parameterType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		delete from DUSDICT_BASE_Code 
+		where 
+			domain_seqno = #{domainSeqno} 
+			and domain_name = #{domainName}
+			<if test="code != null">
+				and code =  #{code}
+			</if>
+			
+	</delete>
+	<update id="updateCodeInfo" parameterType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		update DUSDICT_BASE_Code 
+		set
+			code = #{code},
+			code_name = #{codeName},
+			code_english  = #{codeEnglish},
+			business_define = #{businessDefine},
+			java_type  = #{javaType},
+			java_name = #{javaName},
+			remark = #{remark},
+			tms = sysdate,
+			vno = vno +1 
+		where 
+			domain_seqno = #{domainSeqno} 
+			and code =  #{oriCode}
+			
+	</update>
+	<select id="checkRepeat" parameterType="com.dus.dusframework.web.domain.DusDictBaseCodeDo"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		select * from DUSDICT_BASE_Code
+		where
+			chn_name = #{chnName} 
+			and eng_name = #{engName}
+			and Abbreviate = #{abbreviate}
+	</select>
+	<insert id = "insert" parameterType="com.dus.dusframework.web.domain.DusDictBaseCodeDo">
+		insert into DUSDICT_BASE_Code (
+			domain_seqno,
+			domain_name,
+			code,
+			code_name,
+			code_english,
+			business_define,
+			java_type,
+			java_name,
+			remark,
+			busi_date,
+			tms,
+			vno
+		   )
+		 Values (
+			#{domainSeqno},
+			#{domainName},
+			#{code},
+			#{codeName},
+			#{codeEnglish},
+			#{businessDefine},
+			#{javaType},
+			#{javaName},
+			#{remark},
+			#{busiDate},
+			#{tms},
+			#{vno}
+			)
+	</insert>
+</mapper>

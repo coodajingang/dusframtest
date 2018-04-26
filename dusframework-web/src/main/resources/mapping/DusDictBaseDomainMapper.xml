@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的 -->
+<mapper namespace="com.dus.dusframework.web.dao.DusDictBaseDomainDao">
+
+	<select id="selectByPk" parameterType="com.dus.dusframework.web.domain.DusDictBaseDomainDo"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseDomainDo">
+		select * from DUSDICT_BASE_DOMAIN
+			where domain_name = #{domainName}
+				and  domain_seqno = #{domainSeqno}
+	</select>
+	
+	<select id="searchLikeByPage" parameterType="Map"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseDomainDo">
+		select * from DUSDICT_BASE_DOMAIN
+		<where>
+			<if test="field != null">
+				domain_name like CONCAT(CONCAT('%',#{field}),'%')
+				 or domain_group like CONCAT(CONCAT('%',#{field}),'%')
+				 or domain_chn_name like CONCAT(CONCAT('%',#{field}),'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectByDomainGroup" parameterType="com.dus.dusframework.web.domain.DusDictBaseDomainDo"
+		resultType="com.dus.dusframework.web.domain.DusDictBaseDomainDo">
+		select * from DUSDICT_BASE_DOMAIN
+		where
+			domain_group = #{domainGroup} 
+			and domain_name = #{domainName}
+	</select>
+	<insert id = "insert" parameterType="com.dus.dusframework.web.domain.DusDictBaseDomainDo">
+		<selectKey keyColumn="seqno" keyProperty="domainSeqno" order="BEFORE" resultType="Long">  
+            select (nvl(max(domain_seqno),0) + 1) as seqno  from DUSDICT_BASE_DOMAIN
+        </selectKey>
+		insert into DUSDICT_BASE_DOMAIN (
+			domain_name,
+			domain_chn_name,
+			business_define,
+			domain_seqno,
+			domain_group,
+			data_type,
+			data_format,
+			data_scope,
+			java_type,
+			oracle_type,
+			jdbc_type,
+			remark,
+			busi_date,
+			tms,
+			vno
+		   )
+		 Values (
+			#{domainName},
+			#{domainChnName},
+			#{businessDefine},
+			#{domainSeqno},
+			#{domainGroup},
+			#{dataType},
+			#{dataFormat},
+			#{dataScope},
+			#{javaType},
+			#{oracleType},
+			#{jdbcType},
+			#{remark},
+			#{busiDate},
+			sysdate,
+			1
+			)
+	</insert>
+</mapper>
